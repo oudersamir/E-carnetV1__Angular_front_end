@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-4 mt-5 mx-auto">
+        <form [formGroup]="loginForm"   (ngSubmit)="Login()" >
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input  type="text"  formControlName="email" class="form-control" id="email">
+            
+            <div *ngIf="loginForm.get('email').invalid && ( loginForm.get('email').dirty || loginForm.get('email').touched)">
+                <div *ngIf="loginForm.get('email').getError('required')">This field is Required</div>
+                <div *ngIf="loginForm.get('email').getError('email')">This field should be email address</div>
+
+            </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password </label>
+                <input type="password"  formControlName="password" id="password" class="form-control">
+                
+            <div *ngIf="loginForm.get('password').invalid && ( loginForm.get('password').dirty || loginForm.get('password').touched)">
+                <div *ngIf="loginForm.get('password').getError('required')">This field is Required</div>
+                <div *ngIf="loginForm.get('password').getError('minlength')">This field should be 8 chars</div>
+                <div *ngIf="loginForm.get('password').getError('maxlength')">This field should be 8 chars</div>
+
+            </div>
+        </div>
+            <button [disabled]="loginForm.invalid" class="btn btn-block btn-primary">login</button>
+        </form>
+    </div>
+</div>

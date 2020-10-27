@@ -1,0 +1,137 @@
+
+
+
+<div class="row my-3">
+    <div class="col-md-6">
+  <h2>List of addresses</h2>
+    </div>
+    <div class="col-md-6">
+     <button class="btn btn-primary" (click)="addStatus()"  data-toggle="modal" data-target="#staticBackdrop">Add</button>
+    </div>
+</div>
+
+<!-- <div class="row" *ngIf="addActive">
+  <div class="col-md-6">
+    <form   [formGroup]="formAddress">
+      <div class="form-group">
+        <label  for="type">type</label> <input type="text" formControlName="type" id="type" class="form-control" name="type">
+        <div *ngIf="formAddress.get('type').invalid && ( formAddress.get('type').touched || formAddress.get('type').dirty ) ">
+         <div *ngIf="formAddress.get('type').getError('required')" class="alert alert-danger">this field is required</div> 
+        </div>
+        <label  for="city">City</label> <input type="text"  formControlName="city" id="city" class="form-control" name="city">
+        <div *ngIf="formAddress.get('city').invalid && ( formAddress.get('city').touched || formAddress.get('city').dirty ) ">
+          <div *ngIf="formAddress.get('city').getError('required')" class="alert alert-danger">this field is required</div> 
+         </div>
+        <label  for="street">Street</label> <input type="text" formControlName="street" id="street" class="form-control" name="street">
+        <div *ngIf="formAddress.get('street').invalid && ( formAddress.get('street').touched || formAddress.get('street').dirty ) ">
+          <div *ngIf="formAddress.get('street').getError('required')" class="alert alert-danger">this field is required</div> 
+         </div>
+        <label  for="postal">postal</label> <input type="text" formControlName="postal" id="postal" class="form-control" name="postal">
+        <div *ngIf="formAddress.get('postal').invalid && ( formAddress.get('postal').touched || formAddress.get('postal').dirty ) ">
+          <div *ngIf="formAddress.get('postal').getError('required')" class="alert alert-danger">this field is required</div> 
+         </div>
+        <label  for="country">country</label> <input type="text" formControlName="country" id="country" class="form-control" name="country">
+        <div *ngIf="formAddress.get('country').invalid && ( formAddress.get('country').touched || formAddress.get('country').dirty ) ">
+          <div *ngIf="formAddress.get('country').getError('required')" class="alert alert-danger">this field is required</div> 
+         </div>
+        <button class="btn btn-success" (click)="addAddress()" >valid</button>
+      </div>
+    </form>
+      </div>
+</div> -->
+
+<div class="row">
+    <div class="col-md-6"  *ngFor="let address of addresses">
+      <div class="card border-primary mb-3" >
+        <div class="card-header"><h3>Type : {{address.type}}</h3></div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>City : </strong> {{address.city}}</li>
+                <li class="list-group-item"><strong>Street : </strong> {{address.street}}</li>
+                <li class="list-group-item"><strong>Postal : </strong> {{address.postal}}</li>
+                <li class="list-group-item"><strong>Country : </strong> {{address.country}}</li>
+                <li class="list-group-item text-center">
+                    <button class="btn btn-primary mr-2"   data-toggle="modal" data-target="#staticBackdrop"  (click)="editAddress(address)">Edit</button>
+                    <button class="btn btn-dark mr-2"  (click)="deleteAddress(address)">Delete</button>
+                </li>
+
+
+            </ul>
+          </div>
+      </div>  
+    </div>
+    
+
+</div>
+
+
+
+
+
+
+
+
+<!-- Modal -->
+<div  class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{formName}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form  [formGroup]="formAddress">
+      <div class="modal-body">
+
+          <div class="form-group">
+            <label for="city">City</label>
+            <input formControlName="city" type="text" class="form-control" id="city">
+            <div *ngIf="formAddress.get('city').invalid && ( formAddress.get('city').touched || formAddress.get('city').dirty ) ">
+              <div *ngIf="formAddress.get('city').getError('required')" class="alert alert-danger">this field is required</div> 
+             </div>
+          </div>
+          <div class="form-group">
+            <label for="street">Street</label>
+            <input formControlName="street" type="text" class="form-control" id="street">
+            <div *ngIf="formAddress.get('street').invalid && ( formAddress.get('street').touched || formAddress.get('street').dirty ) ">
+              <div *ngIf="formAddress.get('street').getError('required')" class="alert alert-danger">this field is required</div> 
+             </div>
+          </div>
+          <div class="form-group">
+            <label for="postal">Postal</label>
+            <input formControlName="postal" type="text" class="form-control" id="postal">
+            <div *ngIf="formAddress.get('postal').invalid && ( formAddress.get('postal').touched || formAddress.get('postal').dirty ) ">
+              <div *ngIf="formAddress.get('postal').getError('required')" class="alert alert-danger">this field is required</div> 
+             </div>
+          </div>
+
+          <div class="form-group">
+            <label for="country">Country</label>
+            <input formControlName="country" type="text" class="form-control" id="country">
+            <div *ngIf="formAddress.get('country').invalid && ( formAddress.get('country').touched || formAddress.get('country').dirty ) ">
+              <div *ngIf="formAddress.get('country').getError('required')" class="alert alert-danger">this field is required</div> 
+             </div>
+          </div>
+
+          <div class="form-check">
+            <label class="form-check-label mr-5">
+              <input formControlName="type" type="radio" class="form-check-input" value="Shipping" checked>
+              Shipping
+            </label>
+
+            <label class="form-check-label">
+              <input formControlName="type" type="radio" class="form-check-input" value="Billing" checked>
+              Billing
+            </label>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" [disabled]="!formAddress.valid"  (click)="persisteAddress()">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
